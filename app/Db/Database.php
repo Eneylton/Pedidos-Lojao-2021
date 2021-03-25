@@ -66,11 +66,24 @@ class Database
     public function select($where = null, $order = null, $limit = null, $fields = '*')
     {
 
-        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $where = strlen($where) ? 'as p WHERE ' . $where : '';
         $order = strlen($order) ? 'ORDER BY ' . $order : '';
         $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
 
         $query = 'SELECT ' . $fields . ' FROM ' . $this->table . ' ' . $where . ' ' . $order . ' ' . $limit;
+
+        return $this->execute($query);
+    }
+
+
+    public function receber($where = null, $order = null, $limit = null, $fields = '*')
+    {
+
+        $where = strlen($where) ? 'AND ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
+
+        $query = 'SELECT ' . $fields . ' FROM ' . $this->table . ' as p WHERE p.status = 1 ' . $where . ' ' . $order . ' ' . $limit;
 
         return $this->execute($query);
     }
@@ -115,9 +128,6 @@ class Database
     }
 
 
-
-
-  
     public function relacionadas($where = null, $order = null, $limit = null)
     {
 

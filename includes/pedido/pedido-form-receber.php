@@ -1,44 +1,32 @@
 <?php
 
 $resultados = '';
+$total=0;
+foreach ($produtos as $item) {
+    $total += $item->subtotal;
+    $resultados .= '<tr>
 
-foreach ($produtos2 as $item) {
-
-   $resultados .= '<tr>
-                      <td>
-                      <a href="galeria-list.php?id=' . $item->id . '">
-                      <img style="width:80px; heigth:70px;object-fit: contain;" src="' . $item->foto . '" class="img-thumbnail">
-                      </a>
-                      </td>
+                      <td> <input type="checkbox" value="'.$item->produtos_id.'" name="id[]"></td>
                       <td>' . $item->codigo . '</td>
                       <td>' . $item->barra . '</td>
-                      <td>' . date('d/m/Y à\s H:i:s', strtotime($item->data)) . '</td>
-                      <td style="text-transform: uppercase;">' . $item->nome . '</td>
-                      <td style="text-transform: uppercase;">' . $item->categoria . '</td>
+                      <td style="text-transform:uppercase">' . $item->nome . '</td>
                       <td>
                       
-                      <span class="' . ($item->estoque <= 3 ? 'badge badge-danger' : 'badge badge-secondary') . '">' . $item->estoque . '</span>
+                      <span class="' . ($item->qtd <= 3 ? 'badge badge-danger' : 'badge badge-success') . '">' . $item->qtd . '</span>
                       
                       </td>
-                      <td> <button type="button" class="btn btn-dark"> R$ ' . number_format($item->valor_compra, "2", ",", ".") . '</button></td>
-                      <td style="text-align: center;">
                       
-                      <a href="carrinho.php?acao=add&id='.$item->id.'">
-                         <button type="button" class="btn btn-info"> <i class="fas fa-plus"></i> &nbsp Adicionar</button>
-                       </a>
+                      <td> R$ ' . number_format($item->valor_compra, "2",",",".") . '</td>
+                      <td> <button type="button" class="btn btn-dark"> R$ ' . number_format($item->subtotal, "2", ",", ".") . '</button></td>
 
-
-
-                      </td>
                       </tr>
 
                       ';
 }
 
 $resultados = strlen($resultados) ? $resultados : '<tr>
-                                                     <td colspan="9" class="text-center" > Nenhuma Vaga Encontrada !!!!! </td>
+                                                     <td colspan="5" class="text-center" > Nenhuma Produto Encontrada !!!!! </td>
                                                      </tr>';
-
 
 unset($_GET['status']);
 unset($_GET['pagina']);
@@ -50,8 +38,8 @@ $paginacao = '';
 $paginas = $pagination->getPages();
 
 foreach ($paginas as $key => $pagina) {
-   $class = $pagina['atual'] ? 'btn-primary' : 'btn-secondary';
-   $paginacao .= '<a href="?pagina=' . $pagina['pagina'] . '&' . $gets . '">
+    $class = $pagina['atual'] ? 'btn-primary' : 'btn-secondary';
+    $paginacao .= '<a href="?pagina=' . $pagina['pagina'] . '&' . $gets . '">
 
                   <button type="button" class="btn ' . $class . '">' . $pagina['pagina'] . '</button>
                   </a>';
@@ -70,7 +58,7 @@ foreach ($paginas as $key => $pagina) {
                         <div class="col">
 
                            <label>Pesquisar</label>
-                           <input type="text" class="form-control" name="buscar" value="<?= $buscar ?>">
+                           <input type="text" class="form-control" name="buscar" value="<?=$buscar?>">
 
                         </div>
 
@@ -92,33 +80,41 @@ foreach ($paginas as $key => $pagina) {
 
                </div>
 
+                  <form id="form1" action="receber-insert.php" method="post">
                <div class="card-body">
 
                   <div class="col d-flex align-items-end">
 
-                     <a href="produto-insert.php">
-                        <button type="submit" class="btn btn-success"> <i class="fas fa-plus"></i> Adicionar novo produto</button>
-                     </a>
-
+                     <input type="submit" name="submit" value="Receber" onclick="return confirm('Produtos Atualizados com sucesso !!!')"  class="btn btn-danger" >
                   </div>
                   <br>
                   <table id="example1" class="table table-bordered table-hover table-striped">
                      <thead>
                         <tr>
-                           <th> IMAGEM </th>
+                        
+                           <th><input type="checkbox" id="select-all" > </th>
                            <th> CÓDIGO </th>
                            <th> BARRA </th>
-                           <th> DATA CADASTRO </th>
                            <th> NOME </th>
-                           <th> CATEGORIA </th>
                            <th> QTD </th>
-                           <th> VALOR </th>
-                           <th style="text-align: center;"> AÇÃO </th>
+                           <th> VALOR UNITÁRO </th>
+                           <th> SUBTOTAL </th>
                         </tr>
                      </thead>
                      <tbody>
-                        <?= $resultados ?>
+                        <?=$resultados?>
                      </tbody>
+
+                        <tr>
+                        <td colspan="6" style="text-align: right; ">TOTAL</td>
+
+                        <td>
+
+                        <button type="submit" class="btn btn-primary btn-lg" >
+                         R$ <?=  number_format($total, "2",",",".") ?>
+                        </button>
+                        </td>
+                        </tr>
 
                   </table>
                </div>
@@ -126,13 +122,14 @@ foreach ($paginas as $key => $pagina) {
             </div>
 
          </div>
+      </form>
 
       </div>
 
    </div>
 </section>
 
-<?= $paginacao ?>
+<?=$paginacao?>
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

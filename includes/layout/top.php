@@ -36,6 +36,10 @@ use \App\Session\Login;
           <a href="pedido-list.php" class="nav-link">Pedidos</a>
         </li>
       
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="pedido-receber.php" class="nav-link">Receber Mercadoria</a>
+        </li>
+      
       </ul>
 
       <!-- SEARCH FORM -->

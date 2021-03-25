@@ -3,24 +3,24 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use \App\Entidy\Pedido;
-use   \App\Session\Login;
-
+use \App\Session\Login;
 
 Login::requireLogin();
 
-
-$pedidos = Pedido::getList();
+$pedidos = Pedido::getReceber();
 
 $res = "";
-
+$total = 0;
 foreach ($pedidos as $item) {
-
+$total += $item->subtotal;
     $res .= '
 <tr>
-<td>'.date('d/m/Y à\s H:i:s ', strtotime($item->data)).'</td>
+<td>' . $item->codigo . '
+<td>' . date('d/m/Y à\s H:i:s ', strtotime($item->data)) . '</td>
 <td style="text-align:left;text-transform: uppercase;">' . $item->nome . '</td>
 <td>' . $item->qtd . '</td>
-<td style="text-align:left"> R$ ' . number_format($item->subtotal, "2",",",".") . '</td>
+<td> R$ ' . number_format($item->valor_compra, "2",",",".") . '</td>
+<td style="text-align:left"> R$ ' . number_format($item->subtotal, "2", ",", ".") . '</td>
 </tr>
 ';
 }
@@ -45,7 +45,7 @@ foreach ($pedidos as $item) {
             padding: 0;
             font-family:"Open Sans", sans-serif;
         }
-        
+
         .header{
             position: fixed;
             top:-70px;
@@ -69,10 +69,11 @@ foreach ($pedidos as $item) {
             text-align: center;
             background: #555555;
             color: #fff;
-            }     
-            
+            }
+
             .footer .page:after{
                 content: counter(page);
+                
             }
 
             table{
@@ -87,6 +88,7 @@ foreach ($pedidos as $item) {
             }
 
             table, th, td {
+                font-size: xx-small;
                 border: 1px solid #555555;
                 border-collapse:collapse;
                 text-align: center;
@@ -106,6 +108,7 @@ foreach ($pedidos as $item) {
 
             h2{
                 text-align: center;
+                
             }
 
     </style>
@@ -115,19 +118,39 @@ foreach ($pedidos as $item) {
 
 <body>
 
-    <img style="width:120px; height:50px; margin-left:10px; margin-top:-10px;" src="01.png">
+<table>
+        <tbody>
+            <tr style="background-color: #fff; color:#000">
+                <td style="border:1px solid #fff; text-align:left">
+                <span style="margin-left:126px; margin-top: -30px; font-size:large">LOJÃO DO CARRO</span><br>
+                <span>LISTA DE PEDIDOS</span>
+                <img style="width:120px; height:50px; float:left;margin-top:-40px; padding:10px; margin-left:-12px;" src="01.png">
+                
+                <td style="border:1px solid #fff; text-align:right">
+                  Data: de Emissão: <?php echo date("d/m/Y") ?>
+                </td>
+            </tr>
+      </tbody>
+    </table>
+
+    <!--  -->
 
     <table>
         <tbody>
             <tr style="background-color: #000; color:#fff">
+                <td>CÓDIGO</td>
                 <td>DATA</td>
                 <td>NOME</td>
                 <td>QTD</td>
+                <td>VALOR COMPRA</td>
                 <td>SUBTOTAL</td>
             </tr>
 
-            <?= $res ?>
-
+            <?=$res?>
+           <tr>
+           <td colspan="5" style="text-align:right;font-size: 14px;background-color:#ff0000; color:#eeeeee">TOTAL</td>
+           <td style="text-align:left;font-size:15px;background-color:#ff0000; color:#eeeeee">R$ <?= number_format($total,"2",",",".")?></td>
+           </tr>
         </tbody>
     </table>
 

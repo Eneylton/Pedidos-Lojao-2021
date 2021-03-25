@@ -205,11 +205,14 @@ if (count($_SESSION['carrinho']) == 0) {
             $_SESSION['dados'],
 
             array(
-                'nome' => $item->nome,
-                'qtd' => $qtd,
-                'preco' => $item->valor_compra,
-                'subtotal' => $sub,
-                'produtos_id' => $id,
+                'nome'               => $item->nome,
+                'codigo'             => $item->codigo,
+                'barra'              => $item->barra,
+                'qtd'                => $qtd,
+                'qtd'                => $qtd,
+                'valor_compra'       => $item->valor_compra,
+                'subtotal'           => $sub,
+                'produtos_id'        => $id
             )
         );
 

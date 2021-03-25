@@ -122,5 +122,18 @@ $('#exampleModal').on('show.bs.modal', function (event) {
   })
 </script>
 
+<script type="text/javascript">
+
+$(document).ready(function(){
+  
+    $("#form1 #select-all").click(function(){
+
+        $("#form1 input[type='checkbox'").prop('checked', this.checked);
+    });
+
+});
+
+</script>
+
 </body>
 </html>

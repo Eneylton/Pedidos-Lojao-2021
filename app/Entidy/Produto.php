@@ -144,6 +144,9 @@ public function atualizar(){
   
 }
 
+
+
+
 public function excluir(){
     return (new Database ('produtos'))->delete('id = ' .$this->id);
   

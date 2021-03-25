@@ -16,7 +16,10 @@ foreach ($_SESSION['dados'] as $key) {
   
         $item = new Pedido;
         $item->nome          = $key['nome'];
+        $item->codigo        = $key['codigo'];
+        $item->barra         = $key['barra'];
         $item->qtd           = $key['qtd'];
+        $item->valor_compra  = $key['valor_compra'];
         $item->subtotal      = $key['subtotal'];
         $item->usuarios_id   = $usuario_id;
         $item->produtos_id   = $key['produtos_id'];
