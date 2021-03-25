@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
             $estoque->atualizar();
 
             $item->status = 0;
-            $item->atualizar();
+            $item->excluir();
 
             header('location: pedido-receber.php?status=success');
            

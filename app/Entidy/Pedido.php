@@ -109,5 +109,12 @@ public static function getITem($id){
 }
 
 
+public function excluir(){
+    return (new Database ('pedidos'))->delete('id = ' .$this->id);
+  
+}
+
+
+
 
 }

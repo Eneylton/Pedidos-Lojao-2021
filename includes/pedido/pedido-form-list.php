@@ -17,7 +17,7 @@ foreach ($produtos2 as $item) {
                       <td style="text-transform: uppercase;">' . $item->categoria . '</td>
                       <td>
                       
-                      <span class="' . ($item->estoque <= 3 ? 'badge badge-danger' : 'badge badge-secondary') . '">' . $item->estoque . '</span>
+                      <span style="font-size:16px" class="' . ($item->estoque <= 3 ? 'badge badge-danger' : 'badge badge-secondary') . '">' . $item->estoque . '</span>
                       
                       </td>
                       <td> <button type="button" class="btn btn-dark"> R$ ' . number_format($item->valor_compra, "2", ",", ".") . '</button></td>

@@ -12,7 +12,7 @@ foreach ($produtos as $item) {
                       <td style="text-transform:uppercase">' . $item->nome . '</td>
                       <td>
                       
-                      <span class="' . ($item->qtd <= 3 ? 'badge badge-danger' : 'badge badge-success') . '">' . $item->qtd . '</span>
+                      <span style="font-size:16px" class="' . ($item->qtd <= 3 ? 'badge badge-danger' : 'badge badge-success') . '">' . $item->qtd . '</span>
                       
                       </td>
                       
@@ -25,7 +25,7 @@ foreach ($produtos as $item) {
 }
 
 $resultados = strlen($resultados) ? $resultados : '<tr>
-                                                     <td colspan="5" class="text-center" > Nenhuma Produto Encontrada !!!!! </td>
+                                                     <td colspan="7" class="text-center" > Nenhuma Produto Encontrada !!!!! </td>
                                                      </tr>';
 
 unset($_GET['status']);
