@@ -104,7 +104,6 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 
 
 
-
 <script>
   $(function () {
     $(document).on('click', '[data-toggle="lightbox"]', function(event) {

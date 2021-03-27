@@ -7,6 +7,7 @@
   
   /* Custom Bar */
   .range-wrap::before {
+    color: #c9e743;
     content: "";
     background: linear-gradient(to right, #0145b8, #00e5e0, #00f25e);
     width: 100%;

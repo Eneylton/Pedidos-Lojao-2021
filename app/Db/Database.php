@@ -76,6 +76,25 @@ class Database
     }
 
 
+    public function rank()
+    {
+
+        $query = 'SELECT 
+        e.nome AS nome, COUNT(e.produtos_id) AS contagem
+                  FROM estatisticas AS e GROUP BY e.nome order by contagem DESC LIMIT 10';
+
+        return $this->execute($query);
+    }
+
+    public function despesas()
+    {
+
+        $query = 'SELECT sum(e.subtotal) as total FROM estatisticas as e ';
+
+        return $this->execute($query);
+    }
+
+
     public function receber($where = null, $order = null, $limit = null, $fields = '*')
     {
 
@@ -108,7 +127,7 @@ class Database
         return $this->execute($query);
     }
 
-    
+
     public function qtdBaixo($where = null, $order = null, $limit = null, $fields = '*')
     {
         $where = strlen($where) ? ' AND ' . $where : '';
@@ -228,11 +247,11 @@ class Database
         return $this->execute($query);
     }
 
-    public function consultar($id){
-            
-        $query = 'SELECT * FROM galerias as g WHERE '.$id;
+    public function consultar($id)
+    {
+
+        $query = 'SELECT * FROM galerias as g WHERE ' . $id;
 
         return $this->execute($query);
-                
     }
 }
