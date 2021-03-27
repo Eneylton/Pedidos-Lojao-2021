@@ -47,7 +47,7 @@
 
                   <div class="col d-flex align-items-end">
 
-                     <a href="pdf.php">
+                     <a href="pdf.php" target="_blank">
                         <button type="submit" class="btn btn-dark"> <i class="fas fa-print"></i> &nbsp; &nbsp; IMPRIMIR RELATÓRIO</button>
                      </a>
 
