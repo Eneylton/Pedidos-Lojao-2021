@@ -1,7 +1,8 @@
 <?php 
 use \App\Session\Login;
+use  \App\Entidy\Pedido;
 
-
+ $notific = Pedido::getQtd();
  $usuariologado = Login:: getUsuarioLogado();
 
  $usuario = $usuariologado ? 
@@ -37,7 +38,7 @@ use \App\Session\Login;
         </li>
       
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="pedido-receber.php" class="nav-link">Receber Mercadoria</a>
+          <a href="pedido-receber.php" class="nav-link">Receber Produtos</a>
         </li>
       
       </ul>
@@ -66,10 +67,13 @@ use \App\Session\Login;
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
-            <span class="badge badge-warning navbar-badge">15</span>
+            <span class="badge badge-warning navbar-badge" style="font-size: 12px;  "><?= $notific ?></span>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header">15 Notifications</span>
+            <span class="dropdown-item dropdown-header" >
+            <a href="pedido-receber.php" >
+            <span style="color:crimson">RECEBER </span>&nbsp; <?= $notific ?> &nbsp; PRODUTOS  </span>
+            </a>
           </div>
         </li>
         </a>
